@@ -1,0 +1,97 @@
+﻿.big-home{
+    display:flex;
+    justify-content:space-between;
+    background-color:white;
+    align-items:center;
+}
+.big-home .dd{
+    background-color:mediumpurple;
+}
+.big-home .dd .btn-dd{
+    height: 10vh;
+    width: 200px;
+}
+.big-chart{
+    display: flex;
+    justify-content: space-around;
+}
+.big-chart .money, .customer {
+    background-color: white;
+    width: 35%;
+    height: 40vh;
+    margin-top: 30px;
+}
+.big-chart .money #money{
+    margin-top: 20%;
+    width: 100%;
+    height:40%;
+}
+.big-chart .customer #accommodations {
+    margin-top: 20%;
+    width: 100%;
+    height: 40%;
+}
+.big-chart .money, .customer {
+    overflow: hidden;
+}
+.big-chart .money .hihi {
+    position: relative;
+}
+.big-chart .customer .hihi {
+    position: relative;
+}
+.big-chart .money .hihi .money-info, .customer-info{
+    text-align:center;
+}
+.big-chart .money .icon-money, .icon-customer {
+    font-size: 32px;
+    color: #fff;
+    height: 95px;
+    width: 100px;
+    background: #4336FB;
+    text-align: right;
+    padding-top: 40px;
+    padding-right: 22px;
+    border-radius: 50%;
+    position: absolute;
+    left: -39px;
+    top: -30px;
+}
+.hehe{
+    display:flex;
+}
+.hehe .big-compare{
+    width: 70%;
+    margin-left: 90px;
+}
+.hehe .compare-donut {
+    width: 30%;
+    margin-left: 40px;
+}
+.hehe .big-compare #compare {
+    width: 100%;
+    height: 50vh;
+}
+.hehe .compare-donut #donut{
+    width:72%;
+    height:50vh;
+}
+.room-trend {
+    margin: 10px 90px;
+}
+.room-trend .trend-table .table #two-chart {
+    width: 100%;
+    height: 9vh;
+}
+.room-trend .trend-table{
+    background-color: white;
+}
+.room-trend .trend-table .table tbody tr i{
+    font-size: 32px;
+}
+.room-trend .trend-table .table tbody tr td {
+    font-size: 18px;
+}
+.room-trend .trend-table .table thead tr th {
+    font-size: 18px;
+}

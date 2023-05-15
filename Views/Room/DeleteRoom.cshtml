@@ -1,0 +1,47 @@
+﻿@model HotelManage.Models.Room
+
+@section styles{
+    <link href="~/Content/styles/deletebooking.css" rel="stylesheet" type="text/css" />
+}
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="alertDlt">
+    <p class="titleDlt">Delete</p>
+    <hr />
+    <p>Are you sure you want to delete this?</p>
+</div>
+
+<div class="big-table">
+
+    <table class="table info-table">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.id)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.r_name)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.price)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.status)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.id)</td>
+                <td>@Html.DisplayFor(model => model.r_name)</td>
+                <td>@Html.DisplayFor(model => model.price)</td>
+                <td>@Html.DisplayFor(model => model.status)</td>
+            </tr>
+        </tbody>
+    </table>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color btn-dlt">
+            <input type="submit" value="Delete Booking" /> |
+            <a href="@Url.Action("Manage", "Room")">Back to List</a>
+        </div>
+    }
+
+</div>

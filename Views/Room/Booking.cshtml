@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Booking Page";
+}
+@section styles{
+    <link href="~/Content/styles/Booking.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container-fluid">
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
+
+<div class="room-list">
+    <h1>Room List</h1>
+    <div class="room-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col" class="col-md-2">ID</th>
+                    <th scope="col">Type</th>
+                    <th scope="col" class="col-md-2">Price</th>
+                    <th scope="col" class="col-lg-2">Status</th>
+                    <th scope="col" class="col-lg-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in ViewBag.Rooms)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@item.id</td>
+                        <td>@item.r_name</td>
+                        <td>@item.price</td>
+                        <td>@item.status</td>
+                        <td>
+                            @{ bool flag = false;}
+                            @foreach (var item1 in ViewBag.Bookings)
+                            {
+                                if (@item1.r_id == @item.id)
+                                {
+                                    flag = true;
+                                }
+                            }
+                            @if (flag)
+                            {
+                            <i class="fa-solid fa-pen" onclick="document.getElementById('@i-fix').style.display='block'"></i>
+                            <a href="@Url.Action("DeleteBooking", "Room", new { id = item.id })">
+                                <i class="fas fa-trash fa-white"></i>
+                            </a>
+                            }
+                            else
+                            {
+                            <i class="fa-solid fa-basket-shopping" onclick="document.getElementById('@i').style.display='block'"></i>
+                            }
+                            <i class="fas fa-cash-register fa-white"></i>
+                        </td>
+                    </tr>
+
+
+                    @*Thêm thông tin khách*@
+                    <div class="w3-container">
+                        <div id="@i" class="w3-modal">
+                            <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+                                <div class="w3-center">
+                                    <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                                </div>
+                                <form class="w3-container" action="booking/@item.id" method="post">
+                                    <div class="w3-section">
+                                        <label for="id">ID</label>
+                                        <select name="c_id" id="id">
+                                            @foreach (var item2 in ViewBag.Customers)
+                                            {
+                                                <option value="@item2.id">@item2.id - @item2.c_name</option>
+                                            }
+                                        </select>
+                                        <br />
+                                        <label><b>Checkin</b></label>
+                                        <input class="w3-input w3-border" type="date" placeholder="Enter checkin" name="checkin" required>
+                                        <label><b>Checkout</b></label>
+                                        <input class="w3-input w3-border" type="date" placeholder="Enter checkout" name="checkout" required>
+                                    </div>
+                                    <button type="submit" class="w3-button">Save</button>
+                                </form>
+
+                                <div class="w3-container w3-light-grey w3-padding">
+                                    <button class="w3-button w3-left w3-white w3-border"
+                                            onclick="document.getElementById('@i').style.display='none'">
+                                        Close
+                                    </button>
+                                    <button class="w3-button w3-right w3-white w3-border"
+                                            onclick="document.getElementById('@i').style.display='none'">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Sửa thông tin khách*@
+                    <div class="w3-container">
+                        <div id="@i-fix" class="w3-modal">
+                            <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+                                <div class="w3-center">
+                                    <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                                </div>
+
+                                <form class="w3-container" action="updatebooking/@item.id" method="post">
+                                    <div class="w3-section">
+                                        @foreach (var item3 in ViewBag.Bookings)
+                                        {
+                                            if (@item3.r_id == @item.id)
+                                            {
+                                                <label for="id1">ID</label>
+                                                <select name="c_id" id="id1">
+                                                    @foreach (var item4 in ViewBag.Customers)
+                                                    {
+                                                        if (@item4.id == @item3.c_id)
+                                                        {
+                                                            <option value="@item4.id" selected>@item4.id - @item4.c_name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@item4.id">@item4.id - @item4.c_name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                                <br />
+                                                <label><b>Checkin</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" type="date" value="@item3.checkin.ToString("yyyy-MM-dd")" name="checkin" required>
+                                                <label><b>Checkout</b></label>
+                                                <input class="w3-input w3-border" type="date" value="@item3.checkout.ToString("yyyy-MM-dd")" name="checkout" required>
+                                            }
+                                        }
+                                    </div>
+                                    <button type="submit" class="w3-button">Save</button>
+                                </form>
+                                <div class="w3-container w3-light-grey w3-padding">
+                                    <button class="w3-button w3-left w3-white w3-border"
+                                            onclick="document.getElementById('@i-fix').style.display='none'">
+                                        Close
+                                    </button>
+                                    <button class="w3-button w3-right w3-white w3-border"
+                                            onclick="document.getElementById('@i-fix').style.display='none'">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

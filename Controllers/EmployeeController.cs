@@ -12,12 +12,13 @@ namespace HotelManage.Controllers
 {
     public class EmployeeController : Controller
     {
-        private HotelManageEntity db = new HotelManageEntity();
+        private HotelManageEntities db = new HotelManageEntities();
 
         // GET: Employee
-        public ActionResult Index()
+        public ActionResult Manage()
         {
-            return View(db.Employees.ToList());
+            /*return View(db.Employees.ToList());*/
+            return View();
         }
 
         // GET: Employee/Details/5

@@ -1,0 +1,70 @@
+﻿.alertDlt {
+    background-color: #cfe2ff;
+    border: 1px solid #e2e3e5;
+    width: 40%;
+    margin-left: 2%;
+    padding-left: 2%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+    box-shadow: 5px 3px 5px #ccc;
+}
+.alertDlt .titleDlt {
+    font-weight: 700;
+    font-size: 32px;
+}
+.alertDlt p{
+    font-size: 22px;
+}
+.alertDlt hr {
+    width: 95%;
+}
+
+.big-table {
+    background-color: #cfe2ff;
+    border: 1px solid #e2e3e5;
+    width: 80%;
+    height: 25vh;
+    margin-left: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 10px;
+    box-shadow: 5px 3px 5px #ccc;
+}
+
+.big-table .info-table {
+    font-size: 20px;
+   
+}
+
+.big-table .info-table th {
+    border-bottom: 1px solid #B6B9C5;
+    text-align: center;
+}
+
+    .big-table .info-table td {
+        text-align: center;
+    }
+
+
+.big-table .btn-dlt{
+    display: flex;
+    justify-content: end;
+    margin-right: 5px;
+}
+.big-table .btn-dlt a {
+    color: white;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 8.5px;
+    border-radius: 10px;
+    background-color: #5D72B5;
+}
+
+.big-table .btn-dlt input {
+    color: white;
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 6px;
+    border-radius: 10px;
+    background-color: #ef5350;
+}

@@ -1,47 +1,233 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<main class="d-flex flex-nowrap">
-    <h1 class="visually-hidden">Sidebars examples</h1>
-
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
-            <span class="fs-4">Sidebar</span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home" /></svg>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" /></svg>
-                    Orders
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-                    Products
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link text-white">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle" /></svg>
-                    Customers
-                </a>
-            </li>
+@section styles{
+    <link href="~/Content/styles/home.css" rel="stylesheet" type="text/css" />
+}
+@section scripts{
+    <script>
+        window.onload = function () {
+            //CHART MONEY
+            new CanvasJS.Chart("money", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                axisY: {
+                    gridColor: "transparent",
+                    lineColor: "transparent",
+                    labelFontColor: "transparent",
+                    tickColor: "transparent",
+                }, 
+                axisX: {
+                    lineColor: "transparent",
+                    labelFontColor: "transparent",
+                    tickColor: "transparent",
+                },
+                data: [
+                    {
+                        type: "splineArea",
+                        dataPoints: [
+                            { label: "14/5", y: 1310548 },
+                            { label: "15/5", y: 1532104 },
+                            { label: "16/5", y: 2562013 },
+                            { label: "17/5", y: 3002148 }
+                        ]
+                    }
+                ],
+            }).render();
+            //CHART CUSTOMER
+            new CanvasJS.Chart("accommodations", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                axisY: {
+                    gridColor: "transparent",
+                    lineColor: "transparent",
+                    labelFontColor: "transparent",
+                    tickColor: "transparent",
+                },
+                axisX: {
+                    lineColor: "transparent",
+                    labelFontColor: "transparent",
+                    tickColor: "transparent",
+                },
+                data: [
+                    {
+                        type: "splineArea",
+                        color: "orange",
+                        dataPoints: [
+                            { label: "14/5", y: 1 },
+                            { label: "15/5", y: 2 },
+                            { label: "16/5", y: 3 },
+                            { label: "17/5", y: 4 }
+                        ]
+                    }
+                ],
+            }).render();
+            //CHART COMPARE
+            new CanvasJS.Chart("compare", {
+                animationEnabled: true,
+                data: [
+                    {
+                        type: "line",
+                        dataPoints: [
+                            { label: "apple", y: 10 },
+                            { label: "orange", y: 15 },
+                            { label: "banana", y: 25 },
+                            { label: "mango", y: 30 },
+                            { label: "grape", y: 28 }
+                        ]
+                    },
+                    {
+                        type: "line",
+                        dataPoints: [
+                            { label: "apple", y: 20 },
+                            { label: "orange", y: 10 },
+                            { label: "banana", y: 7 },
+                            { label: "mango", y: 40 },
+                            { label: "grape", y: 37 }
+                        ]
+                    }
+                ]
+            }).render();
+            //CHART DONUT ACE
+            new CanvasJS.Chart("donut", {
+                animationEnabled: true,
+                data: [
+                    {
+                        type: "doughnut",
+                        dataPoints: [
+                            { label: "apple", y: 10 },
+                            { label: "orange", y: 15 },
+                        ]
+                    }
+                ]
+            }).render();
+            //CHART TWO PEOPLE
+            new CanvasJS.Chart("two-chart", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                axisY: {
+                    gridColor: "transparent",
+                    lineColor: "transparent",
+                    labelFontColor: "transparent",
+                    tickColor: "transparent",
+                },
+                axisX: {
+                    lineColor: "transparent",
+                    labelFontColor: "transparent",
+                    tickColor: "transparent",
+                },
+                data: [
+                    {
+                        type: "line",
+                        color: "violet",
+                        dataPoints: [
+                            { label: "apple", y: 1 },
+                            { label: "orange", y: 60 },
+                            { label: "banana", y: 30 },
+                            { label: "mango", y: 100 },
+                            { label: "grape", y: 10 }
+                        ]
+                    }
+                ],
+            }).render();
+        }
+    </script>
+}
+<div class="big-home">
+    <h1>Home</h1>
+    <div class="dropdown dd">
+        <button class="btn dropdown-toggle btn-dd" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
-        <hr />
     </div>
-</main>
+</div>
+<div class="big-chart">
+    <div class="money">
+        <div class="hihi">
+            <div class="icon-money">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="money-info">
+                <h3>Money</h3>
+                <h3>@ViewBag.Total VND</h3>
+            </div>
+        </div>
+        <div id="money"></div>
+    </div>
+    <div class="customer">
+        <div class="hihi">
+            <div class="icon-customer">
+                <i class="fas fa-person"></i>
+            </div>
+            <div class="customer-info">
+                  <h3>Customer</h3>
+                  <h3>@ViewBag.Customer</h3>
+            </div>
+        </div>
+        <div id="accommodations"></div>
+    </div>
+</div>
+<div class="hehe">
+    <div class="big-compare">
+        <h3>Overview</h3>
+        <div id="compare"></div>
+    </div>
+    <div class="compare-donut">
+        <h3>RI BÙ RÍ BU</h3>
+        <div id="donut"></div>
+    </div>
+</div>
+
+<div class="room-trend">
+    <h1>Trends</h1>
+    <div class="trend-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Logo</th>
+                    <th scope="col" class="col-md-2">Type</th>
+                    <th scope="col">Love</th>
+                    <th scope="col" class="col-md-2">Trends</th>
+                    <th scope="col" class="col-lg-2">Stats</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><i class="fas fa-hotel" style="color: #2d9a2f;"></i></th>
+                    <td>Two people</td>
+                    <td>10000</td>
+                    <td><img src="https://colorlib.com/polygon/srtdash/assets/images/icon/market-value/trends-up-icon.png" alt="Phú Thiên" /></td>
+                    <td><div id="two-chart">
+                        
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-hotel" style="color: #ffd800;"></i></th>
+                    <td>Four people</td>
+                    <td>3000</td>
+                    <td><img src="https://colorlib.com/polygon/srtdash/assets/images/icon/market-value/trends-down-icon.png" alt="Phú Thiên" /></td>
+                    <td><div id="four-chart">
+                        
+                        </div>
+                    </td>                   
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-hotel" style="color: #4800ff;"></i></th>
+                    <td>Three people</td>
+                    <td>1000</td>
+                    <td><img src="https://colorlib.com/polygon/srtdash/assets/images/icon/market-value/trends-up-icon.png" alt="Phú Thiên" /></td>
+                    <td><div id="three-chart">
+                        
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HotelManage.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,19 @@ namespace HotelManage.Controllers
 {
     public class HomeController : Controller
     {
+        private HotelManageEntities db = new HotelManageEntities();
         public ActionResult Index()
         {
+            List<Bill> bills = db.Bills.ToList();
+            long sum = db.Customers.Count();
+            float total = 0f;
+            bills.ForEach(x =>
+            {
+                total += (float)x.total;
+            });
+            ViewBag.Total = total;
+            ViewBag.Bill = bills;
+            ViewBag.Customer = sum;
             return View();
         }
 

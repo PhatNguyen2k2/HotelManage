@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Manage Page";
+}
+@section styles{
+    <link href="~/Content/styles/Booking.css" rel="stylesheet" type="text/css" />
+}
+
+@*thêm thông tin*@
+<div class="w3-container">
+    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Add room</button>
+
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+            <div class="w3-center">
+                <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+            </div>
+            <form class="w3-container" action="create" method="post">
+                <div class="w3-section">
+
+                    <label><b>Type</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Type" name="type" required>
+                    <label><b>Price</b></label>
+                    <input class="w3-input w3-border" type="number" placeholder="Enter Price" name="price" required>
+                </div>
+            </form>
+
+            <div class="w3-container w3-light-grey w3-padding">
+                <button class="w3-button w3-left w3-white w3-border"
+                        onclick="document.getElementById('id01').style.display='none'">
+                    Close
+                </button>
+                <button class="w3-button w3-right w3-white w3-border"
+                        onclick="document.getElementById('id01').style.display='none'">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="room-list">
+        <h1>Room List</h1>
+        <div class="room-table">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col" class="col-md-2">ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col" class="col-md-2">Price</th>
+                        <th scope="col" class="col-lg-2">Status</th>
+                        <th scope="col" class="col-lg-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>        
+                    @{int i = 1;}
+                    @foreach (var item in ViewBag.Rooms)
+                    {
+                        <tr>
+                            <th scope="row">@i</th>
+                            <td>@item.id</td>
+                            <td>@item.r_name</td>
+                            <td>@item.price</td>
+                            <td>@item.status</td>
+                            <td>
+                                <i class="fa-solid fa-pen" onclick="document.getElementById('@i-fix').style.display='block'"></i>
+                                <a href="@Url.Action("DeleteRoom", "Room", new { id = item.id })">
+                                    <i class="fas fa-trash fa-white"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                        @*Sửa thông tin*@
+                        <div class="w3-container">
+                            <div id="@i-fix" class="w3-modal">
+                                <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+                                    <div class="w3-center">
+                                        <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                                    </div>
+                                    <form class="w3-container" action="updateroom/@item.id" method="post">
+                                        <div class="w3-section">
+                                                <label><b>Type</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" type="text" value="@item.r_name" name="type" required>
+                                                <label><b>Price</b></label>
+                                                <input class="w3-input w3-border" type="number" value="@item.price" name="price" required>
+                                                <label><b>Status</b></label>
+                                                <input class="w3-input w3-border" type="text" value="@item.status" name="status" required>
+                                        </div>
+                                        <button type="submit" class="w3-button">Save</button>
+                                    </form>
+                                    <div class="w3-container w3-light-grey w3-padding">
+                                        <button class="w3-button w3-left w3-white w3-border"
+                                                onclick="document.getElementById('@i-fix').style.display='none'">
+                                            Close
+                                        </button>
+                                        <button class="w3-button w3-right w3-white w3-border"
+                                                onclick="document.getElementById('@i-fix').style.display='none'">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
