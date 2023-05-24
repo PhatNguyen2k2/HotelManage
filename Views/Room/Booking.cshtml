@@ -5,15 +5,15 @@
     <link href="~/Content/styles/Booking.css" rel="stylesheet" type="text/css" />
 }
 
-<div class="container-fluid">
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+<div class="container-fluid btnSearch">
+    <form class="d-flex" role="search" action=@Url.Action("Search", "Room") method="post">
+        <input class="form-control me-2"  type="search" placeholder="Search" name ="search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
 </div>
 
 <div class="room-list">
-    <h1>Room List</h1>
+    <p>Room List</p>
     <div class="room-table">
         <table class="table table-striped">
             <thead>
@@ -22,6 +22,7 @@
                     <th scope="col" class="col-md-2">ID</th>
                     <th scope="col">Type</th>
                     <th scope="col" class="col-md-2">Price</th>
+                    <th scope="col" class="col-md-2">Love</th>
                     <th scope="col" class="col-lg-2">Status</th>
                     <th scope="col" class="col-lg-2">Action</th>
                 </tr>
@@ -30,130 +31,170 @@
                 @{int i = 1;}
                 @foreach (var item in ViewBag.Rooms)
                 {
-                    <tr>
-                        <th scope="row">@i</th>
-                        <td>@item.id</td>
-                        <td>@item.r_name</td>
-                        <td>@item.price</td>
-                        <td>@item.status</td>
-                        <td>
-                            @{ bool flag = false;}
-                            @foreach (var item1 in ViewBag.Bookings)
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@item.id</td>
+                    <td>@item.r_name</td>
+                    <td>@item.price</td>
+                    <td>@item.love</td>
+                    <td>@item.status</td>
+                    <td>
+                        @{ bool flag = false;}
+                        @foreach (var item1 in ViewBag.Bookings)
+                        {
+                            if (@item1.r_id == @item.id)
                             {
-                                if (@item1.r_id == @item.id)
-                                {
-                                    flag = true;
-                                }
+                                flag = true;
                             }
-                            @if (flag)
-                            {
+                        }
+                        @if (flag)
+                        {
                             <i class="fa-solid fa-pen" onclick="document.getElementById('@i-fix').style.display='block'"></i>
-                            <a href="@Url.Action("DeleteBooking", "Room", new { id = item.id })">
-                                <i class="fas fa-trash fa-white"></i>
-                            </a>
-                            }
-                            else
-                            {
+                            <i class="fas fa-trash fa-white" onclick="document.getElementById('@i-delete').style.display='block'"></i>
+                            <i class="fas fa-cash-register fa-white" onclick="document.getElementById('@i-pay').style.display='block'"></i>
+                        }
+                        else
+                        {
                             <i class="fa-solid fa-basket-shopping" onclick="document.getElementById('@i').style.display='block'"></i>
-                            }
-                            <i class="fas fa-cash-register fa-white"></i>
-                        </td>
-                    </tr>
+                        }
+                    </td>
+                </tr>
 
-
-                    @*Thêm thông tin khách*@
-                    <div class="w3-container">
-                        <div id="@i" class="w3-modal">
-                            <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-                                <div class="w3-center">
-                                    <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
-                                </div>
-                                <form class="w3-container" action="booking/@item.id" method="post">
-                                    <div class="w3-section">
-                                        <label for="id">ID</label>
-                                        <select name="c_id" id="id">
-                                            @foreach (var item2 in ViewBag.Customers)
+                @*Thêm thông tin khách*@
+                <div class="w3-container">
+                    <div id="@i" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            <form class="w3-container" action="booking/@item.id" method="post">
+                                <div class="w3-section">
+                                    <label for="id" style="margin-left:2%;">ID</label>
+                                    <select name="c_id" id="id">
+                                        @foreach (var item2 in ViewBag.Customers)
                                             {
                                                 <option value="@item2.id">@item2.id - @item2.c_name</option>
                                             }
-                                        </select>
-                                        <br />
-                                        <label><b>Checkin</b></label>
-                                        <input class="w3-input w3-border" type="date" placeholder="Enter checkin" name="checkin" required>
-                                        <label><b>Checkout</b></label>
-                                        <input class="w3-input w3-border" type="date" placeholder="Enter checkout" name="checkout" required>
-                                    </div>
-                                    <button type="submit" class="w3-button">Save</button>
-                                </form>
-
-                                <div class="w3-container w3-light-grey w3-padding">
-                                    <button class="w3-button w3-left w3-white w3-border"
-                                            onclick="document.getElementById('@i').style.display='none'">
-                                        Close
-                                    </button>
-                                    <button class="w3-button w3-right w3-white w3-border"
-                                            onclick="document.getElementById('@i').style.display='none'">
-                                        Save
-                                    </button>
+                                    </select>
+                                    <br />
+                                    <label style="margin-left:2%;"><b>Checkin</b></label>
+                                    <input class="w3-input w3-border " style="margin-left:2%; width: 90%;" type="date" placeholder="Enter checkin" name="checkin" required>
+                                    <label style="margin-left:2%;"><b>Checkout</b></label>
+                                    <input class="w3-input w3-border" style="margin-left: 2%; width: 90%;" type="date" placeholder="Enter checkout" name="checkout" required>
                                 </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Save</button>
+                            </form>
+
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i').style.display='none'">
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    @*Sửa thông tin khách*@
-                    <div class="w3-container">
-                        <div id="@i-fix" class="w3-modal">
-                            <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-                                <div class="w3-center">
-                                    <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
-                                </div>
+                @*Sửa thông tin khách*@
+                <div class="w3-container">
+                    <div id="@i-fix" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
 
-                                <form class="w3-container" action="updatebooking/@item.id" method="post">
-                                    <div class="w3-section">
-                                        @foreach (var item3 in ViewBag.Bookings)
+                            <form class="w3-container" action="updatebooking/@item.id" method="post">
+                                <div class="w3-section">
+                                    @foreach (var item3 in ViewBag.Bookings)
                                         {
                                             if (@item3.r_id == @item.id)
                                             {
-                                                <label for="id1">ID</label>
-                                                <select name="c_id" id="id1">
-                                                    @foreach (var item4 in ViewBag.Customers)
-                                                    {
-                                                        if (@item4.id == @item3.c_id)
-                                                        {
-                                                            <option value="@item4.id" selected>@item4.id - @item4.c_name</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option value="@item4.id">@item4.id - @item4.c_name</option>
-                                                        }
-                                                    }
-                                                </select>
-                                                <br />
-                                                <label><b>Checkin</b></label>
-                                                <input class="w3-input w3-border w3-margin-bottom" type="date" value="@item3.checkin.ToString("yyyy-MM-dd")" name="checkin" required>
-                                                <label><b>Checkout</b></label>
-                                                <input class="w3-input w3-border" type="date" value="@item3.checkout.ToString("yyyy-MM-dd")" name="checkout" required>
+                                                <label style="margin-left: 2%;"><b>ID</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" style="margin-left: 2%; width: 90%;" type="text" value="@item3.c_id" name="c_id" readonly>
+                                                <label style="margin-left: 2%;"><b>Checkin</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" style="margin-left: 2%; width: 90%;" type="date" value="@item3.checkin.ToString("yyyy-MM-dd")" name="checkin" required>
+                                                <label style="margin-left:2%;"><b>Checkout</b></label>
+                                                <input class="w3-input w3-border" style="margin-left: 2%; width: 90%;" type="date" value="@item3.checkout.ToString("yyyy-MM-dd")" name="checkout" required>
                                             }
                                         }
-                                    </div>
-                                    <button type="submit" class="w3-button">Save</button>
-                                </form>
-                                <div class="w3-container w3-light-grey w3-padding">
-                                    <button class="w3-button w3-left w3-white w3-border"
-                                            onclick="document.getElementById('@i-fix').style.display='none'">
-                                        Close
-                                    </button>
-                                    <button class="w3-button w3-right w3-white w3-border"
-                                            onclick="document.getElementById('@i-fix').style.display='none'">
-                                        Save
-                                    </button>
                                 </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%; ">Save</button>
+                            </form>
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-fix').style.display='none'">
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>
+                </div>
+                @*Xóa thông tin khách*@
+                <div class="w3-container">
+                    <div id="@i-delete" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom formDltBook" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            <form class="w3-container" action=@Url.Action("DeleteBooking", "Room", new { id = @item.id}) method="post">
+                                <div class="w3-section">
+                                    @foreach (var item3 in ViewBag.Bookings)
+                                        {
+                                            if (@item3.r_id == @item.id)
+                                            {
+                                                <label style="margin-left: 2%;"><b>ID</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="number" value="@item3.c_id" name="c_id" readonly>
+                                                <label style="margin-left: 2%;"><b>Checkin</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="date" value="@item3.checkin.ToString("yyyy-MM-dd")" name="checkin" readonly>
+                                                <label style="margin-left: 2%;"><b>Checkout</b></label>
+                                                <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="date" value="@item3.checkout.ToString("yyyy-MM-dd")" name="checkout" readonly>
+                                            }
+                                        }
+                                </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Delete</button>
+                            </form>
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-delete').style.display='none'">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Thông báo thanh toán*@
+                <div class="w3-container">
+                    <div id="@i-pay" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom formDltBook" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fas fa-hotel" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            @foreach (var item4 in ViewBag.Bookings)
+                            {
+                                if (item4.r_id == item.id)
+                                {
+                                    <form class="w3-container" action=@Url.Action("Bill", "Room", new { id = @item4.c_id}) method="get">
+                                        <div class="w3-section">
+                                            <p>Do you to pay this room ?</p>
+                                        </div>
+                                        <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">OK</button>
+                                    </form>
+                                }
+                            }
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-pay').style.display='none'">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     i++;
                 }
             </tbody>
         </table>
     </div>
 </div>
+<div style="margin-top: 345px"></div>
+<p style="text-align: center; font-size: 20px">&copy; 2023 team 1</p>
