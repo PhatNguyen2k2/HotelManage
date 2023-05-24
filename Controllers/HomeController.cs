@@ -10,33 +10,66 @@ namespace HotelManage.Controllers
     public class HomeController : Controller
     {
         private HotelManageEntities db = new HotelManageEntities();
+        public static string userId;
+        //GET: Home/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
+        // POST: Home/Loginconfirm
+        [HttpPost]
+        public ActionResult LoginConfirm(string user, string password)
+        {
+            ViewData["user"] = user;
+            ViewData["password"] = password;
+            if(user == "admin" || user == "emp")
+            {
+                if(password == db.Accounts.FirstOrDefault(a => a.username == user).password.ToString())
+                {
+                     userId = user;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Notification = "Wrong password";
+                    return RedirectToAction("Login");
+                }
+            }
+            else
+            {
+                ViewBag.Notification = "Wrong username";
+                return RedirectToAction("Login");
+            }
+        }
+        // Home/Logout
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            userId = "";
+            return RedirectToAction("Login");
+        }
+        //GET: Home/Index
         public ActionResult Index()
         {
-            List<Bill> bills = db.Bills.ToList();
-            long sum = db.Customers.Count();
-            float total = 0f;
-            bills.ForEach(x =>
+            if(userId != "admin" && userId != "emp")
             {
-                total += (float)x.total;
-            });
-            ViewBag.Total = total;
-            ViewBag.Bill = bills;
-            ViewBag.Customer = sum;
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+                return View("Login");
+            }
+            else
+            {
+                List<Bill> bills = db.Bills.ToList();
+                long sum = db.Customers.Count();
+                float total = 0f;
+                bills.ForEach(x =>
+                {
+                    total += (float)x.total;
+                });
+                ViewBag.Total = total.ToString();
+                ViewBag.Bill = bills;
+                ViewBag.Customer = sum;
+                ViewBag.userid = userId;
+                return View();
+            }
         }
     }
 }
