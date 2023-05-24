@@ -1,0 +1,27 @@
+﻿
+@section styles{
+    <link href="~/Content/styles/login.css" rel="stylesheet" type="text/css" />
+}
+<div class="imgLog">
+    <img src="https://images.pexels.com/photos/944463/pexels-photo-944463.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" style="filter:brightness(50%); width: 100%;"/>
+</div>
+<div class="bigLogIn">
+    <form action=@Url.Action("LoginConfirm", "Home") method="post">
+        <div class="logTitle">
+            <p class="logSign">SIGN IN</p>
+            <p style="font-size: 20px;">Hello there, Sign in and start managing</p>
+        </div>
+        <div class="formLog">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" name="user" placeholder="Enter username">
+            </div>
+            <div class="mb-3 formPass">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Enter password">           
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+<br/>
