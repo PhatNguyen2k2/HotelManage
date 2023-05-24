@@ -18,17 +18,18 @@ namespace HotelManage.Models
         public Room()
         {
             this.Bookings = new HashSet<Booking>();
-            this.CusServices = new HashSet<CusService>();
+            this.RoomServices = new HashSet<RoomService>();
         }
     
         public int id { get; set; }
         public string r_name { get; set; }
         public Nullable<double> price { get; set; }
+        public Nullable<int> love { get; set; }
         public string status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CusService> CusServices { get; set; }
+        public virtual ICollection<RoomService> RoomServices { get; set; }
     }
 }
