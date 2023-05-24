@@ -17,112 +17,70 @@ namespace HotelManage.Controllers
         // GET: Employee
         public ActionResult Manage()
         {
-            /*return View(db.Employees.ToList());*/
-            return View();
-        }
-
-        // GET: Employee/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
+            if (HomeController.userId != "admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Login", "Home");
             }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
+            else
             {
-                return HttpNotFound();
+                ViewBag.Employees = db.Employees.ToList();
+                return View();
             }
-            return View(employee);
         }
-
-        // GET: Employee/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Employee/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //POST: Employee/create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,e_name,phone,e_address")] Employee employee)
+        public ActionResult Create(string name, string phone, string address)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Employees.Add(employee);
+                ViewData["name"] = name;
+                ViewData["phone"] = phone;
+                ViewData["address"] = address;
+                Employee n = new Employee
+                {
+                    e_name = name,                 
+                    phone = phone,
+                    e_address = address,
+                };
+                db.Employees.Add(n);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Manage");
             }
-
-            return View(employee);
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
-
-        // GET: Employee/Edit/5
-        public ActionResult Edit(string id)
+        //POST: Employee/update/{id}
+        public ActionResult Update(int id, string name, string phone, string address)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
+            ViewData["name"] = name;
+            ViewData["phone"] = phone;
+            ViewData["address"] = address;
+            Employee employee = db.Employees.FirstOrDefault(b => b.id == id);
+            employee.e_name = name;
+            employee.phone = phone;
+            employee.e_address = address;
+            db.SaveChanges();
+            return RedirectToAction("Manage");
         }
 
-        // POST: Employee/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //POST: Employee/deleteemployee/{id}
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,e_name,phone,e_address")] Employee employee)
+        public ActionResult DeleteEmployee(int id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(employee);
-        }
-
-        // GET: Employee/Delete/5
-        public ActionResult Delete(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
-        }
-
-        // POST: Employee/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
-        {
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employees.FirstOrDefault(b => b.id == id);
             db.Employees.Remove(employee);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Manage");
         }
-
-        protected override void Dispose(bool disposing)
+        //POST: Employee/search
+        [HttpPost]
+        public ActionResult Search(string search)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            ViewData["search"] = search;
+            ViewBag.Employees = db.Employees.Where(e => e.e_name.Contains(search)).ToList();
+            return View("Manage");
         }
     }
 }
