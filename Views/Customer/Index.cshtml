@@ -2,37 +2,46 @@
     ViewBag.Title = "Manage Customer Page";
 }
 
+@section styles{
+    <link href="~/Content/styles/Booking.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container-fluid btnSearch">
+    <form class="d-flex" role="search" action=@Url.Action("Search", "Customer") method="post">
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success" style="margin-top: 1%">Add customer</button>
+</div>
+
 @*thêm thông tin*@
-<div class="w3-container">
-    <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Add customer</button>
+<div class="w3-container big-addCus">
+
 
     <div id="id01" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
             <div class="w3-center">
                 <i class="w3-circle w3-margin-top fa-solid fa-users" style="color: #0026ff; font-size: 32px;"></i>
             </div>
-            <form class="w3-container" action="/action_page.php">
+            <form class="w3-container" action="create" method="post">
                 <div class="w3-section">
 
                     <label><b>Name</b></label>
                     <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Name" name="name" required>
                     <label><b>Email</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter mail" name="mail" required>
+                    <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter mail" name="email" required>
                     <label><b>Phone</b></label>
                     <input class="w3-input w3-border w3-margin-bottom" type="tel" placeholder="Enter Phone" name="phone" required>
                     <label><b>Address</b></label>
                     <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Address" name="address" required>
                 </div>
+                <button type="submit" class="btn btn-info" style="margin-bottom: 1%;">Save</button>
             </form>
 
-            <div class="w3-container w3-light-grey w3-padding">
-                <button class="w3-button w3-left w3-white w3-border"
+            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 0;">
+                <button class="btn btn-danger w3-right w3-border"
                         onclick="document.getElementById('id01').style.display='none'">
                     Close
-                </button>
-                <button class="w3-button w3-right w3-white w3-border"
-                        onclick="document.getElementById('id01').style.display='none'">
-                    Save
                 </button>
             </div>
         </div>
@@ -40,13 +49,13 @@
 </div>
 
 <div class="room-list">
-    <h1>Customer List</h1>
+    <p>Customer List</p>
     <div class="room-table">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">STT</th>
-                    <th scope="col" class="col-md-2">ID</th>
+                    <th scope="col" class="col-sm-1">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col" class="col-md-2">Email</th>
                     <th scope="col" class="col-lg-2">Phone</th>
@@ -55,79 +64,89 @@
                 </tr>
             </thead>
             <tbody>
+
+
+                @{int i = 1;}
+                @foreach (var item in ViewBag.Customers)
+                    {
                 <tr>
-                    <th scope="row">1</th>
-                    <td>001</td>
-                    <td>ahihi</td>
-                    <td>ahihi@gmail.com</td>
-                    <td>0321654897</td>
-                    <td>Thủ Đức</td>
+                    <th scope="row">@i</th>
+                    <td>@item.id</td>
+                    <td>@item.c_name</td>
+                    <td>@item.email</td>
+                    <td>@item.phone</td>
+                    <td>@item.c_address</td>
                     <td>
-                        <i class="fa-solid fa-pen" onclick="document.getElementById('id02').style.display='block'"></i>
-                        <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-pen" onclick="document.getElementById('@i-fix').style.display='block'"></i>
+                        <i class="fas fa-trash fa-white" onclick="document.getElementById('@i-delete').style.display='block'"></i>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>002</td>
-                    <td>ahihi</td>
-                    <td>ahihi@gmail.com</td>
-                    <td>0321654897</td>
-                    <td>Thủ Đức</td>
-                    <td>
-                        <i class="fa-solid fa-pen" onclick="document.getElementById('id02').style.display='block'"></i>
-                        <i class="fa-solid fa-trash"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>003</td>
-                    <td>ahihi</td>
-                    <td>ahihi@gmail.com</td>
-                    <td>0321654897</td>
-                    <td>Thủ Đức</td>
-                    <td>
-                        <i class="fa-solid fa-pen" onclick="document.getElementById('id02').style.display='block'"></i>
-                        <i class="fa-solid fa-trash"></i>
-                    </td>
-                </tr>
+
+                @*Sửa thông tin*@
+                <div class="w3-container">
+                    <div id="@i-fix" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fa-solid fa-users" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            <form class="w3-container" action="update/@item.id" method="post">
+                                <div class="w3-section">
+                                    <label style="margin-left: 2%;"><b>Name</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.c_name" name="name" required>
+                                    <label style="margin-left: 2%;"><b>Email</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="email" value="@item.email" name="email" required>
+                                    <label style="margin-left: 2%;"><b>Phone</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="tel" value="@item.phone" name="phone" required>
+                                    <label style="margin-left: 2%;"><b>Address</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.c_address" name="address" required>
+                                </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Save</button>
+                            </form>
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-fix').style.display='none'">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*Xóa thông tin Khách*@
+                <div class="w3-container">
+                    <div id="@i-delete" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fa-solid fa-users" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            <form class="w3-container" action=@Url.Action("DeleteCustomer", "Customer", new { id = @item.id}) method="post">
+                                <div class="w3-section">
+                                    <label style="margin-left: 2%;"><b>Name</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.c_name" name="name" readonly>
+                                    <label style="margin-left: 2%;"><b>Email</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="email" value="@item.email" name="email" readonly>
+                                    <label style="margin-left: 2%;"><b>Phone</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="tel" value="@item.phone" name="phone" readonly>
+                                    <label style="margin-left: 2%;"><b>Address</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.c_address" name="address" readonly>
+
+                                </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Delete</button>
+                            </form>
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-delete').style.display='none'">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 i++;
+               }
             </tbody>
         </table>
     </div>
 </div>
-
-
-@*Sửa thông tin*@
-<div class="w3-container">
-    <div id="id02" class="w3-modal">
-        <div class="w3-modal-content w3-card-4 w3-animate-zoom">
-            <div class="w3-center">
-                <i class="w3-circle w3-margin-top fa-solid fa-users" style="color: #0026ff; font-size: 32px;"></i>
-            </div>
-            <form class="w3-container" action="/action_page.php">
-                <div class="w3-section">
-
-                    <label><b>Name</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Name" name="name" required>
-                    <label><b>Email</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter mail" name="mail" required>
-                    <label><b>Phone</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="tel" placeholder="Enter Phone" name="phone" required>
-                    <label><b>Address</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Address" name="address" required>
-                </div>
-            </form>
-
-            <div class="w3-container w3-light-grey w3-padding">
-                <button class="w3-button w3-left w3-white w3-border"
-                        onclick="document.getElementById('id02').style.display='none'">
-                    Close
-                </button>
-                <button class="w3-button w3-right w3-white w3-border"
-                        onclick="document.getElementById('id02').style.display='none'">
-                    Save
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+<div style="margin-top: 345px"></div>
+<p style="text-align: center; font-size: 20px">&copy; 2023 team 1</p>
