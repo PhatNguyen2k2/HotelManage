@@ -1,0 +1,154 @@
+﻿@{
+    ViewBag.Title = "ManageService Page";
+}
+@section styles{
+    <link href="~/Content/styles/manageservice.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="container-fluid btnSearch">
+    <form class="d-flex" role="search" action=@Url.Action("SearchService", "Service") method="post">
+        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <button onclick="document.getElementById('id01').style.display='block'" class="btn btn-success" style="margin-top: 1%">Add Service</button>
+</div>
+
+
+@*thêm thông tin*@
+<div class="w3-container big-addSer">
+
+
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+            <div class="w3-center">
+                <i class="w3-circle w3-margin-top fa-solid fa-user-tie" style="color: #0026ff; font-size: 32px;"></i>
+            </div>
+            <form class="w3-container" action="create" method="post">
+                <div class="w3-section">
+
+                    <label><b>Name</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Name" name="name" required>
+                    <label for="empID"><b>Employee ID</b></label> <br />
+                    <select class="form-select" aria-label="Default select example" name="empID" id="empID">
+                        @foreach (var item in ViewBag.Employees)
+                        {
+                        <option value="@item.id">@item.id - @item.e_name</option>
+                        }
+                    </select>
+                    <br />
+                    <label><b>Price</b></label>
+                    <input class="w3-input w3-border" type="number" placeholder="Enter Price" name="price" required>
+                </div>
+                <button type="submit" class="btn btn-info" style="margin-left: 0; margin-bottom: 1%;">Save</button>
+            </form>
+
+            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 0;">
+                <button class="btn btn-danger w3-right w3-border"
+                        onclick="document.getElementById('id01').style.display='none'">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="cusSer-list">
+    <p>Service List</p>
+    <div class="cusSer-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">STT</th>
+                    <th scope="col">Name</th>
+                    <th scope="col" class="col-md-2">Employee ID</th>
+                    <th scope="col" class="col-lg-2">Price</th>
+                    <th scope="col" class="col-lg-2">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in ViewBag.Services)
+                    {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@item.s_name</td>
+                    <td>@item.e_id</td>
+                    <td>@item.price</td>
+                    <td>
+                        <i class="fa-solid fa-pen" onclick="document.getElementById('@i-fix').style.display='block'"></i>
+                        <i class="fas fa-trash fa-white" onclick="document.getElementById('@i-delete').style.display='block'"></i>
+                    </td>
+                </tr>
+
+                @*Sửa thông tin*@
+                <div class="w3-container">
+                    <div id="@i-fix" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fa-solid fa-user-tie" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            <form class="w3-container" action=@Url.Action("Update", "Service", new { name = @item.s_name}) method="post">
+                                <div class="w3-section">
+                                    <label style="margin-left: 2%;" for="empID"><b>Employee ID</b></label> <br />
+                                    <select style="margin-left: 2%; width: 90%;" class="form-select" aria-label="Default select example" name="empID" id="empID">
+                                        @foreach (var item1 in ViewBag.Employees)
+                                        {
+                                            if (item1.id == item.e_id)
+                                            {
+                                        <option value="@item1.id" selected>@item1.id - @item1.e_name</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item1.id">@item1.id - @item1.e_name</option>
+                                            }
+                                        }
+                                    </select>
+                                    <br />
+                                    <label style="margin-left: 2%;"><b>Price</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.price" name="price" required>
+                                </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Save</button>
+                            </form>
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-fix').style.display='none'">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Xóa thông tin*@
+                <div class="w3-container">
+                    <div id="@i-delete" class="w3-modal">
+                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+                            <div class="w3-center">
+                                <i class="w3-circle w3-margin-top fa-solid fa-user-tie" style="color: #0026ff; font-size: 32px;"></i>
+                            </div>
+                            <form class="w3-container" action=@Url.Action("DeleteCusService", "Service", new { name = @item.s_name}) method="post">
+                                <div class="w3-section">
+                                    <label style="margin-left: 2%;"><b>Employee ID</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="tel" value="@item.e_id" name="empID" readonly>
+                                    <label style="margin-left: 2%;"><b>Price</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.price" name="price" readonly>
+                                </div>
+                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Delete</button>
+                            </form>
+                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                                <button class="btn btn-danger w3-right w3-border"
+                                        onclick="document.getElementById('@i-delete').style.display='none'">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 i++;
+               }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="margin-top: 310px"></div>
+<p style="text-align: center; font-size: 20px">&copy; 2023 team 1</p>
