@@ -1,0 +1,26 @@
+﻿.cusSer-list p {
+    font-weight: 700;
+    font-size: 32px;
+    text-align: center;
+    color: #00365C;
+}
+.big-addSer button {
+    margin-top: 1%;
+    margin-left: 90%;
+}
+.cusSer-list .cusSer-table tbody tr td i {
+    cursor: pointer;
+}
+.btnSearch {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnSearch form button {
+    margin-top: 5%;
+}
+
+.btnSearch input {
+    width: 80%;
+    margin-top: 5%;
+}

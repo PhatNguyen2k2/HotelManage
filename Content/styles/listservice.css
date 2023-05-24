@@ -1,0 +1,68 @@
+﻿.bigService{
+    display:flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.bigService .serRoom-list{
+    width: 35%;
+    margin-left: 7%;
+    padding-top: 1.5%;
+}
+.bigService .serRoom-list p {
+    font-weight: 700;
+    font-size: 32px;
+    text-align: center;
+    color: #00365C;
+}
+.bigService .service-list p {
+        font-weight: 700;
+        font-size: 32px;
+        text-align: center;
+        color: #00365C;
+}
+.bigService .serRoom-list .serRoom-table i{
+    color: black;
+    cursor: pointer;
+}
+
+
+.bigService .serRoom-list .serRoom-table table tbody tr{
+    font-size:16px;
+}
+
+.bigService .serRoom-table {
+    border: 1px solid black;
+    background-color: #6F96BC;   
+        
+}
+.bigService .serRoom-list .serRoom-table table tbody {
+    background-color: #A5CCF4;
+}
+.bigService .service-table {
+    border: 1px solid black;
+    background-color: #6F96BC;
+}
+.bigService .service-list .service-table table tbody {
+    background-color: #A5CCF4;
+}
+.bigService .service-list{
+  width: 65%;
+  margin-left: 10%;
+}
+.bigService .service-list .service-table {
+    margin-right: 10%;
+    margin-left: 10%;
+}
+.bigService .service-list .service-table tbody i{
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+

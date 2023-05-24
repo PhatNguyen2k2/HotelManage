@@ -4,22 +4,61 @@
     background-color:white;
     align-items:center;
 }
+.big-home p{
+    font-size: 32px;
+    font-weight: 700;
+    margin-left: 1.5%;
+}
+.big-home .dd ul li a{
+    font-size:18px;
+} 
 .big-home .dd{
     background-color:mediumpurple;
 }
-.big-home .dd .btn-dd{
+.big-home .dd img{
+    border-radius: 50%;
+}
+.big-home .dd ul a {
+    color: #8a8a8a;
+    font-size: 16px;
+}
+.big-home .dd ul a:hover {
+    color: #2942fa;
+}
+.big-home .dd button a {
+    color: #ffffff;
+    font-size: 25px;
+    width: 30%;
+    margin-right: 2%;
+}
+.big-home .dd button i{
+    font-size: 15px;
+}
+
+.big-home .dd .btn-dd {
     height: 10vh;
     width: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
-.big-chart{
+.big-home .dd ul {
+    right: 30px !important;
+    left: auto !important;
+    box-shadow: 0 0 45px 0 rgba(131,23,254,.06);
+
+}
+.big-chart {
     display: flex;
     justify-content: space-around;
 }
+
 .big-chart .money, .customer {
     background-color: white;
     width: 35%;
     height: 40vh;
     margin-top: 30px;
+    border-radius: 10px;
 }
 .big-chart .money #money{
     margin-top: 20%;
@@ -64,22 +103,39 @@
     width: 70%;
     margin-left: 90px;
 }
+.hehe .big-compare p{
+   font-size: 32px;
+   font-weight: 700;
+}
 .hehe .compare-donut {
     width: 30%;
     margin-left: 40px;
+    margin-top: 5.2%;
 }
 .hehe .big-compare #compare {
     width: 100%;
     height: 50vh;
 }
-.hehe .compare-donut #donut{
-    width:72%;
-    height:50vh;
+.hehe .compare-donut #donut {
+    width: 72%;
+    height: 50vh;
 }
 .room-trend {
     margin: 10px 90px;
 }
+.room-trend p{
+    font-size: 32px;
+    font-weight: 700;
+}
 .room-trend .trend-table .table #two-chart {
+    width: 100%;
+    height: 9vh;
+}
+.room-trend .trend-table .table #four-chart {
+    width: 100%;
+    height: 9vh;
+}
+.room-trend .trend-table .table #three-chart {
     width: 100%;
     height: 9vh;
 }
@@ -94,4 +150,20 @@
 }
 .room-trend .trend-table .table thead tr th {
     font-size: 18px;
+}
+.bigLogOut .formLogOut .logImg {
+    background-color: mediumpurple;
+    height: 6vh;
+}
+.bigLogOut .formLogOut .logImg img{
+    margin-top: 0.5%;
+    border-radius: 50%;
+}
+.bigLogOut .formLogOut{
+    position: relative;
+}
+.bigLogOut .formLogOut .btnLogOut{
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
