@@ -1,0 +1,105 @@
+﻿.main .banner {
+    position: relative;
+    overflow: hidden;
+    border-bottom: solid 10px #fff;
+    z-index: 0;
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+}
+
+.main .banner .banner-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    background-color: #ecfafb;
+}
+
+.main .banner .banner-img img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(50%);
+}
+
+.main .banner .banner-content {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 777;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.main .banner .banner-content .banner-title h1 {
+    color: white;
+    font-size: 78px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.main .banner .banner-content .banner-title p {
+    color: #ecfafb;
+    margin-bottom: 30px;
+}
+
+.main .banner .banner-content .banner-title .rate-star {
+    display: flex;
+    justify-content: center;
+    color: #eba744;
+    font-size: 13px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 120px;
+    margin: 0 auto 20px;
+    border-radius: 15px;
+}
+
+.main .banner .banner-content .banner-title .rate-star li {
+    margin: 0 3px;
+    padding: 2px 0;
+}
+
+.main .feature .feature-main {
+    margin-top: -115px;
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+    z-index: 2;
+    position: relative;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px 10px 0;
+}
+
+.main .feature .feature-main .feature-ser {
+    margin: 0 -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.main .feature .feature-main .feature-ser .inner {
+    padding-right: 35px;
+    padding-left: 35px;
+}
+
+.main .feature .feature-main .feature-ser .inner-box {
+    box-shadow: inset 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    text-align: center;
+    background-color: #f2ffff;
+    padding: 30px;
+    transition: 0.3s ease-in-out;
+    margin-bottom: 10px;
+    height: calc(100% - 10px);
+}
+
+.main .feature .feature-main .feature-ser .inner-box img {
+    width: 45px !important;
+    height: 45px !important;
+    object-fit: contain;
+    object-position: center;
+    margin-bottom: 10px;
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+}

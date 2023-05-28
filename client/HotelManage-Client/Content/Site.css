@@ -1,0 +1,266 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.header-main {
+    z-index: 9999;
+    position: relative;
+}
+
+.header {
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+    border-radius: 0 0 10px 10px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    width: 100%;
+    height: 80px;
+    padding: 0 15px;
+}
+
+.header-main .header {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.header .menu ul {
+    display: flex;
+    justify-content: center;
+}
+
+.header-main .header .menu ul li {
+    height: 80px;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-main .header .menu ul li a {
+    white-space: nowrap;
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+    line-height: 82px;
+    color: #383a4e;
+    font-size: 15px;
+    transition: 0.3s ease-in-out;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+
+
+
+.about .about-card {
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+    border: solid 10px #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.about .about-card .about-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.about .about-card .about-content .thumd {
+    padding: 0;
+}
+
+.about .about-card .about-content .thumd .image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 70%;
+    margin-bottom: 0;
+}
+
+.about .about-card .about-content .thumd .image img {
+    margin: 0 0 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.about .about-card .about-content .desc {
+    align-self: center;
+    padding: 0;
+}
+
+.about .about-card .about-content .desc .about-text {
+    padding: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.about .about-card .about-content .desc .about-text h2 {
+    margin-bottom: 20px;
+    font-size: 38px;
+}
+
+.about .about-card .about-content .desc a {
+    box-shadow: 0 0 0 10px #fff, 0 2px 48px 0 rgba(0, 0, 0, 0.04) !important;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 40px;
+    letter-spacing: 2px;
+    font-size: 15px;
+    white-space: nowrap;
+    color: #fff;
+    background-color: #3b61dd;
+    transition: 0.4s ease-in-out;
+    text-transform: capitalize;
+}
+
+.footer {
+    position: relative;
+    background-image: url('image/about-5.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.footer::before {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #242632F2;
+    opacity: 1;
+}
+
+.footer .footer-main {
+    position: relative;
+    z-index: 2;
+}
+
+.footer .footer-main .footer-content {
+    margin: 0 -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer .footer-main .footer-content .inner .logo-footer {
+    display: block;
+    height: 70px;
+    margin-bottom: 60px;
+}
+
+.footer .footer-main .footer-content .inner .logo-footer img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.footer .footer-main .footer-content .inner .inner-text {
+    padding: 0 20% 0 0;
+    color: #8588a2;
+}
+
+.footer .footer-main .footer-content .inner .social {
+    margin-top: 50px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer .footer-main .footer-content .inner .social p {
+    display: inline-block;
+    margin-right: 9px;
+    text-align: center;
+}
+
+.footer .footer-main .footer-content .inner .social a {
+    font-size: 16px;
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    background-color: #323232;
+    border-radius: 15px;
+    display: block;
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+    color: white;
+}
+
+.footer .footer-main .footer-content .inner h4 {
+    position: relative;
+    margin-bottom: 60px;
+    color: #ecfafb;
+    line-height: 30px;
+    text-transform: capitalize;
+}
+
+.footer .footer-main .footer-content .inner ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.footer .footer-main .footer-content .inner ul li {
+    margin-bottom: 20px;
+}
+
+.footer .footer-main .footer-content .inner ul li a {
+    color: #ecfafb;
+    display: inline;
+    font-size: 15px;
+    letter-spacing: 1px;
+    line-height: 24.75px;
+    text-align: left;
+    transition: 0.2s ease-in-out;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.footer .footer-main .footer-content .inner .list-insta {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.footer .footer-main .footer-content .inner .list-insta a {
+    border-radius: 5px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: calc(33.3333333333% - 15px);
+    padding-bottom: 28%;
+    margin: 0 15px 15px 0;
+}
+
+.footer .footer-main .footer-content .inner .list-insta a img {
+    position: absolute;
+    border-radius: 5px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    -o-object-position: center;
+    object-position: center;
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}

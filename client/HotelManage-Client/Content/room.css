@@ -1,0 +1,240 @@
+﻿.banner-simple {
+    padding-top: 180px;
+    padding-bottom: 50px;
+    position: relative;
+    background-color: #ecfafb;
+}
+
+.banner-simple .deco-left {
+    position: absolute;
+    z-index: 0;
+    width: 50%;
+    top: 20%;
+    left: -30%;
+    opacity: 0.4;
+}
+
+.banner-simple .deco-right {
+    position: absolute;
+    z-index: 0;
+    width: 50%;
+    top: 20%;
+    right: 0;
+    opacity: 0.4;
+}
+
+.section-title {
+margin-bottom: 0;
+position: relative;
+text-align: center;
+}
+
+.section-title h1 {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.section-title p {
+    max-width: 800px;
+    margin: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.section-title .bread {
+    border-radius: 50px;
+    display: inline-flex;
+    margin: 0;
+    padding: 0 30px;
+    box-shadow: 0 0 0 10px #fff, 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+    background-color: #eba744;
+    height: 45px;
+    align-items: center;
+}
+
+.section-title .bread li {
+    margin-right: 10px;
+    list-style-type: none;
+}
+
+.section-title .bread li a {
+    color: #fff;
+    opacity: 0.6;
+    transition: 0.2s ease-in-out;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.section-title .bread .home a::after {
+    font-size: 11px;
+    margin-left: 10px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054";
+}
+
+.section-title .bread li:last-child {
+    margin-right: 0;
+    opacity: 1;
+    color: #fff;
+}
+
+.section-title .bread li:last-child a {
+    color: currentColor;
+    opacity: 1;
+}
+
+.room-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.room-grid .filter-style {
+    margin: 0 -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.room-grid .filter-style .room-item .inner {
+    padding: 30px;
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.room-grid .filter-style .room-item .inner .image {
+    margin: -20px -20px 30px;
+    border-radius: 5px;
+    padding: 0;
+    overflow: hidden;
+    font-size: 0px;
+    order: 1;
+    width: calc(100% + 40px);
+    position: relative;
+    padding-bottom: 72.8%;
+}
+
+.room-grid .filter-style .room-item .inner .image img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    object-fit: cover;
+    object-position: center;
+    transition: 0.4s ease-in-out;
+}
+
+.room-grid .filter-style .room-item .inner .meta {
+    margin-bottom: 20px;
+    display: inline-flex;
+    background-color: #f2ffff;
+    padding: 5px;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    padding-bottom: 0;
+    order: 2;
+}
+
+.room-grid .filter-style .room-item .inner .meta .meta-item {
+    font-size: 12px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 15px;
+    padding-left: 40px;
+    position: relative;
+    min-height: 30px;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+.room-grid .filter-style .room-item .inner .entry-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    order: 3;
+}
+
+.room-grid .filter-style .room-item .inner .entry-title a {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+
+.room-grid .filter-style .room-item .inner .text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    order: 4;
+}
+
+.room-grid .filter-style .room-item .inner .price {
+    width: 50%;
+    margin-bottom: 0;
+    order: 5;
+}
+
+.room-grid .filter-style .room-item .inner .price .price-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #64bc5f;
+}
+
+.room-grid .filter-style .room-item .inner .price .unit {
+    font-weight: 400;
+    font-size: 15px;
+    color: #64688c;
+    border-bottom: none;
+}
+
+.room-grid .filter-style .room-item .inner .book-btn {
+    text-align: right;
+    order: 6;
+    width: 50%;
+    margin-bottom: 0;
+}
+
+.room-grid .filter-style .room-item .inner .book-btn a {
+    text-decoration: none;
+}
+
+.room-grid .filter-style .room-item .inner .book-btn .btnContact {
+    outline: inherit;
+    box-shadow: 0 0 0 10px #fff, 0 2px 48px 0 rgba(0, 0, 0, 0.04) !important;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 40px;
+    letter-spacing: 2px;
+    font-size: 15px;
+    white-space: nowrap;
+    color: #fff;
+    background-color: #3b61dd;
+    transition: 0.4s ease-in-out;
+    text-transform: capitalize;
+}
+
+.room-grid .filter-style .room-item .inner .book-btn .btnContact:hover {
+    filter: brightness(95%);
+}
