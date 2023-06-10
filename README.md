@@ -1,7 +1,7 @@
 # HotelManage
 ASP.NET MVC Web App (Big exercise)
 
-<img src="https://www.vectorlogo.zone/logos/dotnet/dotnet-vertical.svg" alt="dot net" width="50" height="40"/> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="sql server" width="40" height="40"/> <img src="https://cdn.discordapp.com/attachments/832268654145175572/1112404435004571758/PngItem_237457.png" alt="cshtml" width="40" height="40"/> <img src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-icon.svg" alt="bootstrap" width="40" height="40"/>
+<img src="https://www.vectorlogo.zone/logos/dotnet/dotnet-vertical.svg" alt="dot net" width="50" height="40"/> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="sql server" width="40" height="40"/><img src="https://github.com/PhatNguyen2k2/HotelManage/assets/72639627/22ebc5ac-3812-40a3-99bf-0f24e81048e5)" alt="cshtml" width="40" height="40"/> <img src="https://www.vectorlogo.zone/logos/getbootstrap/getbootstrap-icon.svg" alt="bootstrap" width="40" height="40"/>
 
 ## Result
 ### Login
