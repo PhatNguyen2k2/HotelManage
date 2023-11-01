@@ -70,6 +70,15 @@ namespace HotelManage.Controllers
         public ActionResult DeleteCustomer(int id)
         {
             Customer customer = db.Customers.FirstOrDefault(b => b.id == id);
+            List<Booking> bookings = db.Bookings.Where(b => b.c_id == id).ToList();
+            bookings.ForEach(b =>
+            {
+                List<RoomService> roomService = db.RoomServices.Where(r => r.r_id == id).ToList();
+                roomService.ForEach(r =>
+                {
+                    db.RoomServices.Remove(r);
+                });
+            });
             db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
