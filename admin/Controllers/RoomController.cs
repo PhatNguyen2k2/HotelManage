@@ -96,6 +96,11 @@ namespace HotelManage.Controllers
             ViewData["c_id"] = c_id;
             ViewData["checkin"] = checkin;
             ViewData["checkout"] = checkout;
+            if(checkout < checkin)
+            {
+                TempData["msg"] = "<script>alert('check out time must after check in time!');</script>";
+                return RedirectToAction("Booking");
+            }
             Booking booking = new Booking
             {
                 r_id = id,
@@ -105,7 +110,7 @@ namespace HotelManage.Controllers
             };
             db.Bookings.Add(booking);
             db.SaveChanges();
-            return View(Booking());
+            return RedirectToAction("Booking");
         }
         //POST: Room/update/{id}
         [HttpPost]
@@ -114,6 +119,11 @@ namespace HotelManage.Controllers
             ViewData["c_id"] = c_id;
             ViewData["checkin"] = checkin;
             ViewData["checkout"] = checkout;
+            if (checkout < checkin)
+            {
+                TempData["msg"] = "<script>alert('check out time must after check in time!');</script>";
+                return RedirectToAction("Booking");
+            }
             Booking booking = db.Bookings.FirstOrDefault(b => b.r_id == id && b.c_id == c_id);
             booking.checkin = checkin;
             booking.checkout = checkout;
@@ -125,6 +135,11 @@ namespace HotelManage.Controllers
         public ActionResult DeleteBooking (int id)
         {
             Booking booking = db.Bookings.FirstOrDefault(b => b.r_id == id);
+            List<RoomService> roomService = db.RoomServices.Where(r => r.r_id == id).ToList();
+            roomService.ForEach(r =>
+            {
+                db.RoomServices.Remove(r);
+            });
             db.Bookings.Remove(booking);
             db.SaveChanges();
             return RedirectToAction("Booking");
