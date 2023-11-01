@@ -35,7 +35,7 @@ namespace HotelManage.Controllers
                 Account account = new Account
                 {
                     username = username,
-                    password = password,
+                    password = HomeController.EncodePasswordToBase64(password),
                    
                 };
                 db.Accounts.Add(account);
@@ -54,7 +54,7 @@ namespace HotelManage.Controllers
             ViewData["password"] = password;
             
             Account account = db.Accounts.FirstOrDefault(b => b.username == username);
-            account.password = password;
+            account.password = HomeController.EncodePasswordToBase64(password);
             
             db.SaveChanges();
             return RedirectToAction("Index");
