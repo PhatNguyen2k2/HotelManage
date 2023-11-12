@@ -26,6 +26,7 @@ namespace HotelManage.Controllers
                 ViewBag.Rooms = db.Rooms.ToList();
                 ViewBag.Customers = db.Customers.ToList();
                 ViewBag.Bookings = db.Bookings.ToList();
+                ViewBag.Employees = db.Employees.ToList();
                 return View();
             }
         }
@@ -44,22 +45,32 @@ namespace HotelManage.Controllers
         }
         //POST: Room/create
         [HttpPost]
-        public ActionResult Create(string type, float price)
+        public ActionResult Create(int idroom, string type, float price)
         {
             try
             {
+                ViewData["idroom"] = idroom;
                 ViewData["type"] = type;
                 ViewData["price"] = price;
-                Room r = new Room
+                if (db.Rooms.FirstOrDefault(rs => rs.id == idroom) == null)
                 {
-                    r_name = type,
-                    price = price,
-                    love = 0,
-                    status = "ready"
-                };
-                db.Rooms.Add(r);
-                db.SaveChanges();
-                return RedirectToAction("Manage");
+                    Room r = new Room
+                    {
+                        id = idroom,
+                        r_name = type,
+                        price = price,
+                        love = 0,
+                        status = "ready"
+                    };
+                    db.Rooms.Add(r);
+                    db.SaveChanges();
+                    return RedirectToAction("Manage");
+                }
+                else
+                {
+                    TempData["msg"] = "<script>alert('Already has that room id');</script>";
+                    return RedirectToAction("Manage");
+                }
             }
             catch (Exception e)
             {
@@ -73,9 +84,9 @@ namespace HotelManage.Controllers
             ViewData["price"] = price;
             ViewData["status"] = status;
             Room room = db.Rooms.FirstOrDefault(b => b.id == id);
-            room.r_name = type;
-            room.price = price;
-            room.status = status;
+                room.r_name = type;
+                room.price = price;
+                room.status = status;
             db.SaveChanges();
             return RedirectToAction("Manage");
         }
@@ -96,7 +107,7 @@ namespace HotelManage.Controllers
             ViewData["c_id"] = c_id;
             ViewData["checkin"] = checkin;
             ViewData["checkout"] = checkout;
-            if(checkout < checkin)
+            if(checkout < checkin || checkin < DateTime.Now)
             {
                 TempData["msg"] = "<script>alert('check out time must after check in time!');</script>";
                 return RedirectToAction("Booking");
@@ -119,7 +130,7 @@ namespace HotelManage.Controllers
             ViewData["c_id"] = c_id;
             ViewData["checkin"] = checkin;
             ViewData["checkout"] = checkout;
-            if (checkout < checkin)
+            if (checkout < checkin || checkin < DateTime.Now)
             {
                 TempData["msg"] = "<script>alert('check out time must after check in time!');</script>";
                 return RedirectToAction("Booking");
@@ -163,10 +174,10 @@ namespace HotelManage.Controllers
             return View("Manage");
         }
         //GET: Room/bill/{id}
-        public ActionResult Bill(int id)
+        public ActionResult Bill(int id, int e_id)
         {
-            int eid = db.Employees.FirstOrDefault(e => e.e_name == "Phạm Thu Thủy").id;
-            _ = db.Database.ExecuteSqlCommand(@"insert into Bill(c_id,e_id,status) values (@cid,@eid,'unpaid')", new SqlParameter("@cid",id), new SqlParameter("@eid",eid));
+            ViewData["e_id"] = e_id;
+            _ = db.Database.ExecuteSqlCommand(@"insert into Bill(c_id,e_id,status) values (@cid,@eid,'unpaid')", new SqlParameter("@cid",id), new SqlParameter("@eid",e_id));
             db.SaveChanges();
             Bill bl = new Bill();
             bl = db.Bills.OrderByDescending(b => b.id).First();
@@ -174,6 +185,7 @@ namespace HotelManage.Controllers
             booking = db.Bookings.FirstOrDefault(b => b.c_id == bl.c_id);
             ViewBag.Bill = bl;
             ViewBag.RoomServices = db.RoomServices.Where(rs => rs.r_id == booking.r_id).ToList();
+            ViewBag.Booking = booking;
             return View();
         }
         //POST: Room/printBill/{id}
@@ -242,6 +254,7 @@ namespace HotelManage.Controllers
             ViewBag.Rooms = db.Rooms.ToList();
             ViewBag.Customers = db.Customers.ToList();
             ViewBag.Bookings = db.Bookings.ToList();
+            ViewBag.Employees = db.Employees.ToList();
             return View("Booking");
         }
     }
