@@ -31,7 +31,7 @@
                     <label><b>Email</b></label>
                     <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter mail" name="email" required>
                     <label><b>Phone</b></label>
-                    <input class="w3-input w3-border w3-margin-bottom" type="tel" placeholder="Enter Phone" name="phone" required>
+                    <input class="w3-input w3-border w3-margin-bottom" type="tel" placeholder="Enter Phone" name="phone" pattern="0[0-9]{9}" required>
                     <label><b>Address</b></label>
                     <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Address" name="address" required>
                 </div>
@@ -96,7 +96,7 @@
                                     <label style="margin-left: 2%;"><b>Email</b></label>
                                     <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="email" value="@item.email" name="email" required>
                                     <label style="margin-left: 2%;"><b>Phone</b></label>
-                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="tel" value="@item.phone" name="phone" required>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="tel" value="@item.phone" name="phone" pattern="0[0-9]{9}" required>
                                     <label style="margin-left: 2%;"><b>Address</b></label>
                                     <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.c_address" name="address" required>
                                 </div>
