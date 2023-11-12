@@ -30,6 +30,16 @@
                     <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter UserName" name="username" required>
                     <label><b>Password</b></label>
                     <input class="w3-input w3-border w3-margin-bottom" type="password" placeholder="Enter password" name="password" required>
+                    <label style="padding-right: 1%; margin-bottom: 2%"><b>Position</b></label>
+                    <input type="radio" id="admin" name="position" value="admin">
+                    <label for="admin">Admin</label>
+                    <input type="radio" id="employee" name="position" value="emp">
+                    <label for="employee">Employee</label> </br>
+                    <label><b>Question 1: What's your hobbies ?</b></label>
+                    <textarea class="w3-input w3-border w3-margin-bottom" name="answer1" required></textarea>
+                    <label><b>Question 2: What's position do you want ?</b></label>
+                    <textarea class="w3-input w3-border w3-margin-bottom" name="answer2" required></textarea>
+
                 </div>
                 <button type="submit" class="btn btn-info" style="margin-bottom: 1%;">Save</button>
             </form>
@@ -52,9 +62,11 @@
             <thead>
                 <tr>
                     <th scope="col">STT</th>
-                    <th scope="col" class="col-sm-1">Username</th>
-                    <th scope="col">Password</th> 
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Position</th>
                     <th scope="col" class="col-lg-2">Action</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -67,38 +79,11 @@
                     <th scope="row">@i</th>
                     <td>@item.username</td>
                     <td style="-webkit-text-security: disc;">@item.password</td>
-                    
+                    <td>@item.position</td>
                     <td>
-                        <i class="fa-solid fa-pen" onclick="document.getElementById('@i-fix').style.display='block'"></i>
                         <i class="fas fa-trash fa-white" onclick="document.getElementById('@i-delete').style.display='block'"></i>
                     </td>
                 </tr>
-
-                @*Sửa thông tin*@
-                <div class="w3-container">
-                    <div id="@i-fix" class="w3-modal">
-                        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
-                            <div class="w3-center">
-                                <i class="w3-circle w3-margin-top fa-solid fa-users" style="color: #0026ff; font-size: 32px;"></i>
-                            </div>
-                            <form class="w3-container" action="update/@item.username" method="post">
-                                <div class="w3-section">
-                                    <label style="margin-left: 2%;"><b>Username</b></label>
-                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.username" name="username" readonly>
-                                    <label style="margin-left: 2%;"><b>Password</b></label>
-                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="password" value="@item.password" name="password" required>
-                                </div>
-                                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Save</button>
-                            </form>
-                            <div class="w3-container w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
-                                <button class="btn btn-danger w3-right w3-border"
-                                        onclick="document.getElementById('@i-fix').style.display='none'">
-                                    Close
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 @*Xóa thông tin Khách*@
                 <div class="w3-container">
@@ -113,7 +98,8 @@
                                     <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.username" name="username" readonly>
                                     <label style="margin-left: 2%;"><b>Password</b></label>
                                     <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="password" value="@item.password" name="password" readonly>
-
+                                    <label style="margin-left: 2%;"><b>Position</b></label>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="position" value="@item.position" name="position" readonly>
                                 </div>
                                 <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Delete</button>
                             </form>
