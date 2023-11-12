@@ -27,6 +27,10 @@
                     <td>@ViewBag.Bill.e_id</td>
                 </tr>
                 <tr>
+                    <td style="font-weight: bold;">Days:</td>
+                    <td>@((Convert.ToDateTime(@ViewBag.Booking.checkout) - Convert.ToDateTime(@ViewBag.Booking.checkin)).TotalDays)</td>
+                </tr>
+                <tr>
                     <td style="font-weight: bold;">Status:</td>
                     <td>@ViewBag.Bill.status</td>
                 </tr>
