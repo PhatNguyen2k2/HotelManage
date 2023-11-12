@@ -16,5 +16,8 @@ namespace HotelManage.Models
     {
         public string username { get; set; }
         public string password { get; set; }
+        public string position { get; set; }
+        public string answer1 { get; set; }
+        public string answer2 { get; set; }
     }
 }

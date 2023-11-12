@@ -11,6 +11,9 @@
           </Key>
           <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="200" />
+          <Property Name="position" Type="varchar" MaxLength="50" />
+          <Property Name="answer1" Type="varchar" MaxLength="250" />
+          <Property Name="answer2" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Bill">
           <Key>
@@ -64,7 +67,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="r_name" Type="nvarchar" MaxLength="50" />
           <Property Name="price" Type="float" />
           <Property Name="love" Type="int" />
@@ -212,6 +215,9 @@
           </Key>
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="answer1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="answer2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Bill">
           <Key>
@@ -275,7 +281,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="r_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="price" Type="Double" />
           <Property Name="love" Type="Int32" />
@@ -427,6 +433,9 @@
               <MappingFragment StoreEntitySet="Account">
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="answer1" ColumnName="answer1" />
+                <ScalarProperty Name="answer2" ColumnName="answer2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

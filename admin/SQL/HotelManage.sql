@@ -14,7 +14,7 @@ create table Customer(
 	c_address nvarchar(255)
 )
 create table Room(
-	id int not null primary key identity(1,1),
+	id int not null primary key,
 	r_name nvarchar(50),
 	price float,
 	love int,
@@ -56,6 +56,9 @@ create table Bill(
 create table Account(
 	username nvarchar(50) not null primary key,
 	password varchar(200),
+	position varchar(50),
+	answer1 varchar(250),
+	answer2 varchar(250)
 )
 -- Nhân viên
 insert into Employee(e_name,phone,e_address) values (N'Nguyễn Hoàng Phát','0362485798',N'Ninh Thuận');
@@ -76,10 +79,10 @@ insert into CusService values (N'Cold Towel', 3, 2000);
 insert into CusService values (N'Pepsi', 1, 20000);
 
 --Phòng
-insert into Room(r_name,price,love,status) values (N'One People',400000,0,N'ready');
-insert into Room(r_name,price,love,status) values (N'Two people',600000,0,N'ready');
-insert into Room(r_name,price,love,status) values (N'Three people',700000,0,N'ready');
-insert into Room(r_name,price,love,status) values (N'Four people',1000000,0,N'ready');
+insert into Room values (101,N'One People',400000,0,N'ready');
+insert into Room values (102,N'Two people',600000,0,N'ready');
+insert into Room values (103,N'Three people',700000,0,N'ready');
+insert into Room values (104,N'Four people',1000000,0,N'ready');
 
 -- Khách hàng đặt phòng
 insert into Booking values (1,2,'2023-05-01','2023-05-05');
@@ -97,7 +100,7 @@ insert into Bill(c_id,e_id,status) values (1,1,'unpaid');
 insert into Bill(c_id,e_id,status) values (2,2,'unpaid');
 
 --Tài khoản
-insert into Account values('admin','12345');
+insert into Account(username, password) values('admin','MTIzNDU=');
 insert into Account values('emp','12345');
 --Trigger
 -- Hóa đơn với giá phòng
@@ -107,12 +110,20 @@ for insert
 AS
 	Begin
 		Declare @sohd int, @price float
-		set @price = 0
 		select  @sohd = i.id, @price = (select sum((cs.price * rs.amount)) from CusService cs, RoomService rs, Booking b where b.c_id = i.c_id
 										and rs.r_id = b.r_id and cs.s_name = rs.s_name) from inserted i
-		update Bill
-		set total = (select (r.price*DATEDIFF(day, b.checkin, b.checkout)) from Room r, inserted i, Booking b where b.c_id = i.c_id and b.r_id = r.id) + @price
-		where id = @sohd
+		if @price > 0
+		begin
+			update Bill
+			set total = (select (r.price*DATEDIFF(day, b.checkin, b.checkout)) from Room r, inserted i, Booking b where b.c_id = i.c_id and b.r_id = r.id) + @price
+			where id = @sohd
+		end
+		else
+		begin
+			update Bill
+			set total = (select (r.price*DATEDIFF(day, b.checkin, b.checkout)) from Room r, inserted i, Booking b where b.c_id = i.c_id and b.r_id = r.id)
+			where id = @sohd
+		end
 	End
 -- Cộng số lượng khi trùng tên dịch vụ
 go
@@ -134,7 +145,5 @@ select * from employee;
 select * from Booking;
 select * from RoomService;
 select * from Bill;
-delete from Bill
-drop table Bill
-update Room set love = 20 where id = 1
+select * from Account;
 drop trigger tr_hd
