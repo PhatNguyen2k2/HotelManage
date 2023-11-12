@@ -99,7 +99,7 @@
                                 <form class="w3-container" action=@Url.Action("AddService", "Service", new { id = @Url.RequestContext.RouteData.Values["id"], name = item.s_name }) method="post">
                                     <div class="w3-section">
                                         <label style="margin-left: 2%;"><b>Amount</b></label>
-                                        <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="number" placeholder="EnterAmount" name="amount" required>
+                                        <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="number" placeholder="EnterAmount" name="amount" min="1" required>
                                     </div>
                                     <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Save</button>
                                 </form>

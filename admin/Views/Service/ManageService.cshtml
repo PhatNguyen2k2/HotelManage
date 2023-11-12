@@ -37,7 +37,7 @@
                     </select>
                     <br />
                     <label><b>Price</b></label>
-                    <input class="w3-input w3-border" type="number" placeholder="Enter Price" name="price" required>
+                    <input class="w3-input w3-border" type="number" placeholder="Enter Price" name="price" min="1000" required>
                 </div>
                 <button type="submit" class="btn btn-info" style="margin-left: 0; margin-bottom: 1%;">Save</button>
             </form>
@@ -106,7 +106,7 @@
                                     </select>
                                     <br />
                                     <label style="margin-left: 2%;"><b>Price</b></label>
-                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" value="@item.price" name="price" required>
+                                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="number" value="@item.price" name="price" min="1000" required>
                                 </div>
                                 <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Save</button>
                             </form>
