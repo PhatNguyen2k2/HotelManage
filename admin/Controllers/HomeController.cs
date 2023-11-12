@@ -47,22 +47,23 @@ namespace HotelManage.Controllers
         {
             ViewData["user"] = user;
             ViewData["password"] = password;
-            if(user == "admin" || user == "emp")
+            Account account = db.Accounts.FirstOrDefault(a => a.username == user);
+            if(account != null)
             {
-                if(password == DecodeFrom64(db.Accounts.FirstOrDefault(a => a.username == user).password.ToString()))
+                if(password == DecodeFrom64(account.password.ToString()))
                 {
-                     userId = user;
+                     userId = account.position;
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    ViewBag.Notification = "Wrong password";
+                    ViewBag.Notification = "Wrong username or password";
                     return RedirectToAction("Login");
                 }
             }
             else
             {
-                ViewBag.Notification = "Wrong username";
+                ViewBag.Notification = "Wrong username or password";
                 return RedirectToAction("Login");
             }
         }
@@ -97,5 +98,44 @@ namespace HotelManage.Controllers
                 return View();
             }
         }
+        //POST: Home/Forgetpassword
+        [HttpPost]
+        public ActionResult ForgetPassword(string username, string answer1, string answer2)
+        {
+            ViewData["username"] = username;
+            ViewData["answer1"] = answer1;
+            ViewData["answer2"] = answer2;
+            Account account = db.Accounts.FirstOrDefault(a => a.username == username);
+            if(account != null)
+            {
+                if(DecodeFrom64(account.answer1) == answer1 && DecodeFrom64(account.answer2) == answer2)
+                {
+                    userId = account.username;
+                    return RedirectToAction("ResetPassword");
+                }
+                else
+                {
+                    return RedirectToAction("Login");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+        }
+        //GET: Home/ResetPassword
+        public ActionResult ResetPassword()
+        {
+            ViewBag.username = userId;
+            return View("ResetPassword");
+        }
+        //POST: Home/ResetPassword
+        public ActionResult ConfirmPassword(string password)
+        {
+            Account account = db.Accounts.FirstOrDefault(a => a.username == userId);
+            account.password = EncodePasswordToBase64(password);
+            db.SaveChanges();
+            return RedirectToAction("Login");
+        }
     }
-}
+}       
