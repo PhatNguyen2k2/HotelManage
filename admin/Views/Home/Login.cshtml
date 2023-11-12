@@ -18,10 +18,38 @@
             </div>
             <div class="mb-3 formPass">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Enter password" >           
+                <input type="password" class="form-control" name="password" placeholder="Enter password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+    <p style="font-size:18px; cursor:pointer;text-align:center;color:darkblue" onclick="document.getElementById('forgetpass').style.display='block'">Forget password ?</p>
 </div>
 <br/>
+<div class="w3-container">
+    <div id="forgetpass" class="w3-modal">
+        <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="position: relative;">
+            <div class="w3-center">
+                <i class="w3-circle w3-margin-top fa-solid fa-user-tie" style="color: #0026ff; font-size: 32px;"></i>
+            </div>
+            <form class="w3-container" action=@Url.Action("ForgetPassword", "Home") method="post">
+                <div class="w3-section">
+                    <label style="margin-left: 2%;"><b>Username:</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" type="text" name="username" required>
+                    <label style="margin-left: 2%;"><b>Question 1: What's your hobbies ?</b></label>
+                    <textarea class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" name="answer1" required></textarea>
+                    <label style="margin-left: 2%;"><b>Question 2: What's position do you want ?</b></label>
+                    <textarea class="w3-input w3-border w3-margin-bottom" style="margin-left:2%; width: 90%;" name="answer2" required></textarea>
+
+                </div>
+                <button type="submit" class="btn btn-info" style="margin-left: 2%; margin-bottom: 1%;">Submit</button>
+            </form>
+            <div class="w3-container  w3-padding" style=" width: 10%; position: absolute; bottom: 0; right: 6%;">
+                <button class="btn btn-danger w3-right w3-border"
+                        onclick="document.getElementById('forgetpass').style.display='none'">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
