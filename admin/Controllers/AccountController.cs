@@ -25,18 +25,22 @@ namespace HotelManage.Controllers
         }
         //POST: Account/create
         [HttpPost]
-        public ActionResult Create(string username, string password)
+        public ActionResult Create(string username, string password, string position, string answer1, string answer2)
         {
             try
             {
                 ViewData["username"] = username;
                 ViewData["password"] = password;
-
+                ViewData["position"] = position;
+                ViewData["answer1"] = answer1;
+                ViewData["answer2"] = answer2;
                 Account account = new Account
                 {
                     username = username,
                     password = HomeController.EncodePasswordToBase64(password),
-                   
+                    position = position,
+                    answer1 = HomeController.EncodePasswordToBase64(answer1),
+                    answer2 = HomeController.EncodePasswordToBase64(answer2),
                 };
                 db.Accounts.Add(account);
                 db.SaveChanges();
@@ -46,18 +50,6 @@ namespace HotelManage.Controllers
             {
                 throw e;
             }
-        }
-        //POST: Account/update/{username}
-        public ActionResult Update(string username, string password)
-        {
-            ViewData["username"] = username;
-            ViewData["password"] = password;
-            
-            Account account = db.Accounts.FirstOrDefault(b => b.username == username);
-            account.password = HomeController.EncodePasswordToBase64(password);
-            
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         //POST: Account/deleteaccount/{username}
